@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "categorias",
+  "info": {
+    "singularName": "categoria",
+    "pluralName": "categorias",
+    "displayName": "Categoría"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "nombre": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "string",
+      "unique": true
+    },
+    "imagen": {
+      "type": "media",
+      "multiple": false
+    },
+    "seo_titulo": {
+      "type": "string"
+    },
+    "seo_descripcion": {
+      "type": "text"
+    }
+  }
+}
