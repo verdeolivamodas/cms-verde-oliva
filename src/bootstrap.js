@@ -1,7 +1,7 @@
 "use strict";
 
 module.exports = async ({ strapi }) => {
-  strapi.log.info("🚀 [Bootstrap] Iniciando comprobación de categorías base...");
+  strapi.log.info("🚀 [Bootstrap] Comprobando categorías base Verde Oliva...");
 
   const categorias = [
     "Mujer",
@@ -35,5 +35,5 @@ module.exports = async ({ strapi }) => {
     }
   }
 
-  strapi.log.info("✨ [Bootstrap] Importación automática de categorías completada.");
+  strapi.log.info("✨ [Bootstrap] Categorías de Verde Oliva listas.");
 };
