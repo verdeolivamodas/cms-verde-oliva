@@ -4,10 +4,19 @@
   "info": {
     "singularName": "categoria",
     "pluralName": "categorias",
-    "displayName": "Categoría"
+    "displayName": "Categoría",
+    "description": "Categorías principales de la tienda Verde Oliva"
   },
   "options": {
     "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "content-manager": {
+      "visible": true
+    },
+    "content-type-builder": {
+      "visible": true
+    }
   },
   "attributes": {
     "nombre": {
@@ -15,12 +24,8 @@
       "required": true
     },
     "slug": {
-      "type": "string",
-      "unique": true
-    },
-    "imagen": {
-      "type": "media",
-      "multiple": false
+      "type": "uid",
+      "targetField": "nombre"
     },
     "seo_titulo": {
       "type": "string"
