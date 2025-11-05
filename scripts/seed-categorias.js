@@ -1,9 +1,21 @@
 "use strict";
 
-const { Strapi } = require("@strapi/strapi");
+const strapiFactory = require("@strapi/strapi");
 
 (async () => {
-  const app = await Strapi().load();
+  // 🔹 CONFIGURACIÓN MÍNIMA EMBEBIDA
+  process.env.NODE_ENV = "development";
+  process.env.ADMIN_AUTH_SECRET = "verdealiva_admin_secret";
+  process.env.APP_KEYS = "verdealiva1,verdealiva2";
+  process.env.JWT_SECRET = "verdealiva_jwt_secret";
+  process.env.TRANSFER_TOKEN_SALT = "verdealiva_transfer";
+  process.env.API_TOKEN_SALT = "verdealiva_api_token";
+  process.env.DATABASE_CLIENT = "sqlite";
+  process.env.DATABASE_FILENAME = ".tmp/data.db";
+
+  // 🔹 Iniciar Strapi manualmente
+  const app = await strapiFactory.createStrapi();
+  await app.start();
 
   const categorias = [
     "Mujer",
@@ -37,5 +49,6 @@ const { Strapi } = require("@strapi/strapi");
   }
 
   console.log("✨ Importación completada.");
+  await app.destroy();
   process.exit(0);
 })();

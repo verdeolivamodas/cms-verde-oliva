@@ -1,17 +1,13 @@
-module.exports = ({ env }) => ({
+module.exports = {
   auth: {
-    secret: env('ADMIN_JWT_SECRET'),
+    secret: process.env.ADMIN_AUTH_SECRET || 'verdealiva_admin_secret',
   },
   apiToken: {
-    salt: env('API_TOKEN_SALT'),
+    salt: process.env.API_TOKEN_SALT || 'verdealiva_api_token',
   },
   transfer: {
     token: {
-      salt: env('TRANSFER_TOKEN_SALT'),
+      salt: process.env.TRANSFER_TOKEN_SALT || 'verdealiva_transfer',
     },
   },
-  flags: {
-    nps: env.bool('FLAG_NPS', true),
-    promoteEE: env.bool('FLAG_PROMOTE_EE', true),
-  },
-});
+};
