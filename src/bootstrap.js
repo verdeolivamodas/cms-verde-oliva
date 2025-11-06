@@ -3,8 +3,8 @@
 const slugify = require('slugify');
 
 /**
- * Este bootstrap crea automáticamente las categorías base de Verde Oliva
- * cuando el proyecto se despliega (local o en Strapi Cloud).
+ * Bootstrap de depuración: muestra en los logs todas las categorías existentes
+ * y crea las que falten (solo para pruebas o despliegues iniciales).
  */
 module.exports = async ({ strapi }) => {
   const baseCategorias = [
@@ -19,12 +19,22 @@ module.exports = async ({ strapi }) => {
   strapi.log.info('🚀 [Bootstrap] Comprobando categorías base Verde Oliva...');
 
   try {
-    // Esperar a que Strapi esté completamente listo (importante para Cloud)
+    // Esperar unos segundos (necesario en despliegues Cloud)
     await new Promise((resolve) => setTimeout(resolve, 3000));
 
-    // Buscar las categorías ya existentes
+    // Leer todas las categorías existentes en la base de datos
     const existentes = await strapi.db.query('api::categoria.categoria').findMany();
 
+    strapi.log.info(`📦 Categorías actualmente en la base de datos: ${existentes.length}`);
+
+    if (existentes.length > 0) {
+      strapi.log.info('📋 Listado de categorías existentes:');
+      existentes.forEach((cat) => {
+        strapi.log.info(`   • ${cat.id} → ${cat.nombre} (${cat.slug})`);
+      });
+    }
+
+    // Crear solo las que falten
     for (const nombre of baseCategorias) {
       const existe = existentes.find(
         (c) => c.nombre.toLowerCase() === nombre.toLowerCase()
